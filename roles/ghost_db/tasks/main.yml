@@ -1,0 +1,14 @@
+---
+- name: Create a k8s namespace
+  kubernetes.core.k8s:
+    name: mysql-deployment
+    api_version: v1
+    kind: Namespace
+    state: present
+
+- name: Create MySQL
+  kubernetes.core.k8s:
+    state: present
+    src: mysql-deployment.yml
+
+ 

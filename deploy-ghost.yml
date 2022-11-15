@@ -1,3 +1,7 @@
 ---
 # Playbook to deploy Ghost and its components
 # TO DO
+- name: Create MySQL 
+  hosts: localhost
+  roles:
+      - ghost_db
