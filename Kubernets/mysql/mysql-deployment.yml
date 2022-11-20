@@ -4,7 +4,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql-deployment
-  namespace: mysql-deployment
+  namespace: default
   labels:
     app: mysql
     tier: database
@@ -27,9 +27,9 @@ spec:
         - name: MYSQL_ALLOW_EMPTY_PASSWORD
           value: "true"
         - name: MYSQL_DATABASE
-          value: swap
+          value: ghost
         - name: MYSQL_USER
-          value: swapuser
+          value: ghostuser
         - name: MYSQL_PASSWORD
           value: "123456" # Use Secret object in real usage
         ports:

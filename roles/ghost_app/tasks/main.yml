@@ -1,0 +1,10 @@
+- name: Create Ghost
+  kubernetes.core.k8s:
+    state: present
+    src: Kubernets/ghost-deployment.yml
+
+
+- name: Service Ghost
+  kubernetes.core.k8s:
+    state: present
+    src: Kubernets/ghost-service.yml

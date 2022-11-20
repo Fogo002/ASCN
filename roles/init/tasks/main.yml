@@ -1,0 +1,3 @@
+---
+- name : Pastas Mem
+  shell: mkdir /mnt/data

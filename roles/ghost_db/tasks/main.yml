@@ -1,14 +1,25 @@
----
-- name: Create a k8s namespace
+---    
+- name: Create PV
   kubernetes.core.k8s:
-    name: mysql-deployment
-    api_version: v1
-    kind: Namespace
     state: present
+    src: Kubernets/persistent-volume.yml
+
 
 - name: Create MySQL
   kubernetes.core.k8s:
     state: present
-    src: mysql-deployment.yml
+    src: Kubernets/mysql/mysql-deployment.yml
+
+- name: PVC MySQL
+  kubernetes.core.k8s:
+    state: present
+    src: Kubernets/mysql/mysql-pvc.yml
+
+
+- name: Service MySQL
+  kubernetes.core.k8s:
+    state: present
+    src: Kubernets/mysql/mysql-service.yml
+
 
  
