@@ -9,5 +9,6 @@
 - name: Deploy Ghost+MySQL
   hosts: localhost
   roles:
-      - ghost_db
+    #  - ghost_db
       - ghost_app
+  

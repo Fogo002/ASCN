@@ -28,7 +28,7 @@ spec:
         - name: database__connection__user
           value: ghostuser
         - name: database__connection__password
-          value: "123456"
+          value: "ola"
         - name: database__connection__host
           value: mysql-service 
           url: http://localhost:3306

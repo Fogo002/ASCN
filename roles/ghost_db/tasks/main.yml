@@ -1,8 +1,8 @@
 ---    
-- name: Create PV
-  kubernetes.core.k8s:
-    state: present
-    src: Kubernets/persistent-volume.yml
+#- name: Create PV
+#  kubernetes.core.k8s:
+#    state: present
+#    src: Kubernets/persistent-volume.yml
 
 
 - name: Create MySQL
