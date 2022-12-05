@@ -1,9 +1,4 @@
 ---
-- name: Preparação
-  hosts: all
-  become: yes
-  roles:
-    - init
 # Playbook to deploy Ghost and its components
 # TO DO
 - name: Deploy Ghost+MySQL
