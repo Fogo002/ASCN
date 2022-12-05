@@ -8,3 +8,17 @@
   kubernetes.core.k8s:
     state: present
     src: Kubernets/ghost-service.yml
+  
+- name: Get IP
+  register: ola
+  shell: kubectl get service ghost-service --output yaml
+
+- name: Print
+  debug:
+    var: ola.stdout_lines[-1].ip
+
+
+#- name: Print IP
+#  lineinfile:
+#    path: clusterip.txt
+#    regexp: '- ip: [].[].[].157'
