@@ -33,4 +33,4 @@ spec:
           value: mysql-service 
           url: http://localhost:3306
         ports:
-        - containerPort: 3000
+        - containerPort: 2368
