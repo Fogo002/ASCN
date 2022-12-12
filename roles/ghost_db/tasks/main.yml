@@ -9,11 +9,9 @@
     state: present
     src: Kubernets/mysql/mysql-pvc.yml
 
-
 - name: Service MySQL
   kubernetes.core.k8s:
     state: present
     src: Kubernets/mysql/mysql-service.yml
-
 
  
