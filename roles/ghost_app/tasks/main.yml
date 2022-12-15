@@ -28,3 +28,5 @@
   set_fact:
    ghost_ip: "{{ ola.stdout_lines[-1] | regex_search('\\d+\\.\\d+\\.\\d+\\.\\d+')}}"
 
+- name: Update ghost_ip
+  template: src=gcp_template dest=inventory/gcp.yml

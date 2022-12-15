@@ -1,0 +1,2 @@
+- name: Delete MySQL Deployment
+  shell: kubectl delete deployment mysql-deployment
