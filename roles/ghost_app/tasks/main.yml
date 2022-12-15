@@ -8,23 +8,23 @@
     state: present
     src: Kubernets/ghost-service.yml
 
-- name: Get mysql pod
+- name: Get MySQL Pod Name
   register: ola2
   shell: kubectl get pods --output yaml
 
-- name: Get Ghost IP
+- name: Get MySQL Pod Name 2
   set_fact:
    abc: "{{ ola2.stdout_lines[136] | regex_replace('\\ +name:\\ ')}}"
 
-- name: Get mysql pod
+- name: Update Admin in MySQL
   register: ola2
-  shell: kubectl exec -it {{abc}} mysql --u ghostuser --p ola -D ghost --e "update users set name='ascn', password='\$2b\$10\$eALJbjSd4uptSAQz3XVFMeTwmFZCah7TalSSDkMl6Kh0qsZJ2Sdzm', email='ascn@example.com', status='active' where id=1;"
+  shell: kubectl exec -it {{abc}} -- bash -c "mysql -u ghostuser -pola ghost -e \"update users set name='ascn', password='\\\$2b\\\$10\\\$eALJbjSd4uptSAQz3XVFMeTwmFZCah7TalSSDkMl6Kh0qsZJ2Sdzm', email='ascn@example.com', status='active' where id=1;\""
   
-- name: Get IP
+- name: Get Ghost IP
   register: ola
   shell: kubectl get service ghost-service --output yaml
 
-- name: Get Ghost IP
+- name: Get Ghost IP 2
   set_fact:
    ghost_ip: "{{ ola.stdout_lines[-1] | regex_search('\\d+\\.\\d+\\.\\d+\\.\\d+')}}"
 
