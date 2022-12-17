@@ -9,24 +9,33 @@
     src: Kubernets/ghost-service.yml
 
 - name: Get MySQL Pod Name
-  register: ola2
-  shell: kubectl get pods --output yaml
-
-- name: Get MySQL Pod Name 2
-  set_fact:
-   abc: "{{ ola2.stdout_lines[136] | regex_replace('\\ +name:\\ ')}}"
+  kubernetes.core.k8s_info:
+    kind: Pod
+    label_selectors:
+      - app = mysql
+  register: pod_list
 
 - name: Update Admin in MySQL
   register: ola2
-  shell: kubectl exec -it {{abc}} -- bash -c "mysql -u ghostuser -pola ghost -e \"update users set name='ascn', password='\\\$2b\\\$10\\\$eALJbjSd4uptSAQz3XVFMeTwmFZCah7TalSSDkMl6Kh0qsZJ2Sdzm', email='ascn@example.com', status='active' where id=1;\""
-  
+  shell: kubectl exec -it {{ pod_list.resources[0].metadata.name }} -- bash -c "mysql -u ghostuser -pola ghost -e \"update users set name='ascn', password='\\\$2b\\\$10\\\$eALJbjSd4uptSAQz3XVFMeTwmFZCah7TalSSDkMl6Kh0qsZJ2Sdzm', email='ascn@example.com', status='active' where id=1;\""
+
+- name: Wait for Ghost Service External IP
+  shell: "kubectl get services ghost-service -o wide | awk '{ print $4}' |  grep -v EXT"
+  register: k_ext_ip
+  until: k_ext_ip.stdout[0].isdigit() != False
+  retries: 6
+  delay: 10
+
 - name: Get Ghost IP
-  register: ola
-  shell: kubectl get service ghost-service --output yaml
+  kubernetes.core.k8s_info:
+    kind: Service
+    label_selectors:
+      - app = ghost
+  register: ghost_service
 
 - name: Get Ghost IP 2
   set_fact:
-   ghost_ip: "{{ ola.stdout_lines[-1] | regex_search('\\d+\\.\\d+\\.\\d+\\.\\d+')}}"
+    ghost_ip: "{{ ghost_service.resources[0].status.loadBalancer.ingress[0].ip }}"
 
 - name: Update ghost_ip
   template: src=gcp_template dest=inventory/gcp.yml
