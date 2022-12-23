@@ -16,8 +16,11 @@
   register: pod_list
 
 - name: Update Admin in MySQL
-  register: ola2
   shell: kubectl exec -it {{ pod_list.resources[0].metadata.name }} -- bash -c "mysql -u ghostuser -pola ghost -e \"update users set name='ascn', password='\\\$2b\\\$10\\\$eALJbjSd4uptSAQz3XVFMeTwmFZCah7TalSSDkMl6Kh0qsZJ2Sdzm', email='ascn@example.com', status='active' where id=1;\""
+  register: update_admin
+  until: "update_admin is not failed"
+  retries: 6
+  delay: 10
 
 - name: Wait for Ghost Service External IP
   shell: "kubectl get services ghost-service -o wide | awk '{ print $4}' |  grep -v EXT"

@@ -1,2 +1,2 @@
-- name: Delete MySQL Deployment
-  shell: kubectl delete deployment mysql-deployment
+- name: Delete Ghost Deployment
+  shell: kubectl delete deployment ghost-deployment
