@@ -42,3 +42,6 @@
 
 - name: Update ghost_ip
   template: src=gcp_template dest=inventory/gcp.yml
+
+- name: Create Dashboard
+  shell: "gcloud monitoring dashboards create --config-from-file=roles/ghost_app/tasks/dashboards/Ghost_Cluster_Monitor.json"
