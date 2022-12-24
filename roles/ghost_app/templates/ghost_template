@@ -33,6 +33,6 @@ spec:
           value: mysql-service 
           url: http://localhost:3306
         - name: url 
-          value: http://34.69.207.191:80
+          value: http://{{ ghost_ip }}:{{ ghost_port }}
         ports:
         - containerPort: 2368

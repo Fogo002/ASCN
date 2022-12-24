@@ -13,10 +13,10 @@
     kind: Pod
     label_selectors:
       - app = mysql
-  register: pod_list
+  register: mysql_pod
 
 - name: Update Admin in MySQL
-  shell: kubectl exec -it {{ pod_list.resources[0].metadata.name }} -- bash -c "mysql -u ghostuser -pola ghost -e \"update users set name='ascn', password='\\\$2b\\\$10\\\$eALJbjSd4uptSAQz3XVFMeTwmFZCah7TalSSDkMl6Kh0qsZJ2Sdzm', email='ascn@example.com', status='active' where id=1;\""
+  shell: kubectl exec -it {{ mysql_pod.resources[0].metadata.name }} -- bash -c "mysql -u ghostuser -pola ghost -e \"update users set name='ascn', password='\\\$2b\\\$10\\\$eALJbjSd4uptSAQz3XVFMeTwmFZCah7TalSSDkMl6Kh0qsZJ2Sdzm', email='ascn@example.com', status='active' where id=1;\""
   register: update_admin
   until: "update_admin is not failed"
   retries: 6
@@ -43,5 +43,13 @@
 - name: Update ghost_ip
   template: src=gcp_template dest=inventory/gcp.yml
 
+- name: Update ghost_deployment.yml
+  template: src=ghost_template dest=Kubernets/ghost-deployment.yml
+
+- name: Update Ghost URL
+  kubernetes.core.k8s:
+    state: present
+    src: Kubernets/ghost-deployment.yml
+
 - name: Create Dashboard
-  shell: "gcloud monitoring dashboards create --config-from-file=roles/ghost_app/tasks/dashboards/Ghost_Cluster_Monitor.json"
+  shell: "gcloud monitoring dashboards create --config-from-file=roles/ghost_app/dashboards/Ghost_Cluster_Monitor.json"
