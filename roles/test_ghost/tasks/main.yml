@@ -12,3 +12,42 @@
   until: result.status == 200
   retries: 3
   delay: 5
+
+- name: 10 users
+  set_fact: 
+    users: 10
+
+- name: Make test 10 users
+  template: src=Test_template dest=jmeter/jmeter_tests/Test_GET_10_users.jmx
+
+- name: Test 10
+  shell: "./jmeter/bin/jmeter -n -t jmeter/jmeter_tests/Test_GET_10_users.jmx -l jmeter/jmeter_tests/output_10.out"
+  async: 60
+  poll: 1
+  ignore_errors: true
+
+- name: 100 users
+  set_fact: 
+    users: 100
+
+- name: Make test 100 users
+  template: src=Test_template dest=jmeter/jmeter_tests/Test_GET_100_users.jmx
+
+- name: Test 100
+  shell: "./jmeter/bin/jmeter -n -t jmeter/jmeter_tests/Test_GET_100_users.jmx -l jmeter/jmeter_tests/output_100.out"
+  async: 60
+  poll: 1
+  ignore_errors: true
+
+- name: 1000 users
+  set_fact: 
+    users: 1000
+
+- name: Make test 1000 users
+  template: src=Test_template dest=jmeter/jmeter_tests/Test_GET_1000_users.jmx
+
+- name: Test 1000
+  shell: "./jmeter/bin/jmeter -n -t jmeter/jmeter_tests/Test_GET_1000_users.jmx -l jmeter/jmeter_tests/output_1000.out"
+  async: 60
+  poll: 1
+  ignore_errors: true
