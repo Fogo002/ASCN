@@ -31,7 +31,6 @@ spec:
           value: "ola"
         - name: database__connection__host
           value: mysql-service 
-          url: http://localhost:3306
         - name: url 
           value: http://34.69.207.191:80
         ports:
