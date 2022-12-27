@@ -31,7 +31,23 @@ spec:
           value: "ola"
         - name: database__connection__host
           value: mysql-service 
+          url: http://localhost:3306
         - name: url 
-          value: http://34.69.207.191:80
+          value: http://34.173.237.229:80
+        - name: mail__transport
+          value: "SMTP"
+        - name: mail__options__service
+          value: "Mailgun"
+        - name: mail__options__host
+          value: "smtp.mailgun.org"
+        - name: mail__options__auth__user
+          value: "postmaster@sandbox5f79738c435e4d059ebce5ba34575ab3.mailgun.org"
+        - name: mail__options__auth__pass
+          value: "ignore(changed by template)"
+        - name: mail__options__secure
+          value: "true"
+        - name: mail__options__port
+          value: "465"
         ports:
         - containerPort: 2368
+        resources:
