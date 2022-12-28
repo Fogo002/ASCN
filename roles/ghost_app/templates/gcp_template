@@ -20,4 +20,7 @@ all:
 
 
   # Additional variables
-  # ...
+  mail_user: postmaster@sandbox5f79738c435e4d059ebce5ba34575ab3.mailgun.org
+  mail_pass: example
+  mail_secure: true
+  mail_port: 465

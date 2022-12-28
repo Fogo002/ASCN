@@ -24,14 +24,13 @@ spec:
         image: ghost:5.14.1
         env: # The variables below could be set on a ConfigMap object
         - name: database__connection__database 
-          value: ghost
+          value: "ghost"
         - name: database__connection__user
-          value: ghostuser
+          value: "ghostuser"
         - name: database__connection__password
           value: "ola"
         - name: database__connection__host
-          value: mysql-service 
-          url: http://localhost:3306
+          value: "mysql-service"
         - name: url 
           value: http://{{ ghost_ip }}:{{ ghost_port }}
         - name: mail__transport
@@ -41,13 +40,13 @@ spec:
         - name: mail__options__host
           value: "smtp.mailgun.org"
         - name: mail__options__auth__user
-          value: "postmaster@sandbox5f79738c435e4d059ebce5ba34575ab3.mailgun.org"
+          value: "{{ mail_user }}"
         - name: mail__options__auth__pass
           value: "{{ mail_pass }}"
         - name: mail__options__secure
-          value: "true"
+          value: "{{ mail_secure }}"
         - name: mail__options__port
-          value: "465"
+          value: "{{ mail_port }}"
         ports:
         - containerPort: 2368
         resources:
