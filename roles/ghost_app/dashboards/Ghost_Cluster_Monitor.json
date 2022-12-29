@@ -90,8 +90,8 @@
           }
         },
         "width": 6,
-        "xPos": 6,
-        "yPos": 4
+        "xPos": 0,
+        "yPos": 8
       },
       {
         "height": 4,
@@ -220,21 +220,8 @@
           }
         },
         "width": 6,
-        "xPos": 0,
-        "yPos": 8
-      },
-      {
-        "height": 4,
-        "widget": {
-          "logsPanel": {
-            "filter": "",
-            "resourceNames": []
-          },
-          "title": "Painel de registros sem título"
-        },
-        "width": 6,
         "xPos": 6,
-        "yPos": 8
+        "yPos": 4
       }
     ]
   }
