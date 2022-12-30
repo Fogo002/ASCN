@@ -22,13 +22,13 @@
 
 - name: Test 10
   shell: "./jmeter/bin/jmeter -n -t jmeter/jmeter_tests/Test_GET_10_users.jmx -l jmeter/jmeter_tests/output_10.out"
-  async: 90
+  async: 120
   poll: 1
   ignore_errors: true
 
-- name: Pause for 30 seconds
+- name: Pause for 60 seconds before next Test
   pause:
-    seconds: 30
+    seconds: 60
 
 - name: 100 users
   set_fact: 
@@ -39,13 +39,13 @@
 
 - name: Test 100
   shell: "./jmeter/bin/jmeter -n -t jmeter/jmeter_tests/Test_GET_100_users.jmx -l jmeter/jmeter_tests/output_100.out"
-  async: 90
+  async: 120
   poll: 1
   ignore_errors: true
 
-- name: Pause for 30 seconds
+- name: Pause for 60 seconds before next Test
   pause:
-    seconds: 30
+    seconds: 60
 
 - name: 1000 users
   set_fact: 
@@ -56,6 +56,6 @@
 
 - name: Test 1000
   shell: "./jmeter/bin/jmeter -n -t jmeter/jmeter_tests/Test_GET_1000_users.jmx -l jmeter/jmeter_tests/output_1000.out"
-  async: 90
+  async: 120
   poll: 1
   ignore_errors: true
