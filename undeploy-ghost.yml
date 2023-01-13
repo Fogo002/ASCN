@@ -4,5 +4,5 @@
 - name: Undeploy Ghost
   hosts: localhost
   roles:
-      - {role: undeploy_ghost_app}
-      - {role: undeploy_ghost_db, when: "delete_data is defined and delete_data == 'true'"}
+      - {role: undeploy_ghost}
+      - {role: undeploy_data, when: "delete_data is defined and delete_data == 'true'"}
