@@ -1,2 +1,5 @@
 - name: Delete MySQL Deployment
   shell: kubectl delete deployment mysql-deployment
+
+- name: Delete MySQL PVC
+  shell: kubectl delete pvc mysql-pv-claim
